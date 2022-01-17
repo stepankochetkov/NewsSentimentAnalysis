@@ -1,0 +1,22 @@
+{
+	"name": "RestResource1",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "LinkedServiceGoogleNews",
+			"type": "LinkedServiceReference",
+			"parameters": {
+				"q": "Russia",
+				"from": "2022-01-14",
+				"to": "2022-01-15",
+				"sortBy": "popularity",
+				"apiKey": {
+					"type": "SecureString",
+					"value": "**********"
+				}
+			}
+		},
+		"annotations": [],
+		"type": "RestResource",
+		"schema": []
+	}
+}
