@@ -69,24 +69,10 @@
 					"secureOutput": true,
 					"secureInput": false
 				},
-				"userProperties": [
-					{
-						"name": "apiKey",
-						"value": ""
-					}
-				],
+				"userProperties": [],
 				"typeProperties": {
 					"url": "https://keyvaultskdev0001.vault.azure.net/secrets/apiGoogleNews/b086b00aab1b43bda6995675b290fefc?api-version=7.0",
 					"method": "GET",
-					"datasets": [
-						{
-							"referenceName": "RestResource1",
-							"type": "DatasetReference",
-							"parameters": {
-								"apiKey": "@activity('Web1').output.value"
-							}
-						}
-					],
 					"authentication": {
 						"type": "MSI",
 						"resource": "https://vault.azure.net"
