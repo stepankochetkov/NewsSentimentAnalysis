@@ -50,7 +50,8 @@
 							"apiKey": {
 								"value": "@activity('Web1').output.value",
 								"type": "Expression"
-							}
+							},
+							"sortBy": "popularity"
 						}
 					}
 				],

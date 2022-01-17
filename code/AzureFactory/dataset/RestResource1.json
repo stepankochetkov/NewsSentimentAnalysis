@@ -26,18 +26,22 @@
 			},
 			"q": {
 				"type": "string",
-				"defaultValue": "Russia"
+				"defaultValue": "russia OR russian"
 			},
 			"sortBy": {
 				"type": "string",
 				"defaultValue": "popularity"
+			},
+			"qInTitle": {
+				"type": "string",
+				"defaultValue": "russia OR russian"
 			}
 		},
 		"annotations": [],
 		"type": "RestResource",
 		"typeProperties": {
 			"relativeUrl": {
-				"value": "@concat('https://newsapi.org/v2/everything?q=', dataset().q, '&from=', dataset().from, '&to=', dataset().to, '&sortBy=', dataset().sortBy, '&apiKey=', dataset().apiKey)",
+				"value": "@concat('https://newsapi.org/v2/everything?q=', dataset().q, '&from=', dataset().from, '&to=', dataset().to, '&sortBy=', dataset().sortBy, '&qInTitle=', dataset().qInTitle, '&apiKey=', dataset().apiKey)",
 				"type": "Expression"
 			}
 		},
