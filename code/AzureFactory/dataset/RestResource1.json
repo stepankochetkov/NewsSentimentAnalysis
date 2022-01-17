@@ -15,13 +15,29 @@
 			"apiKey": {
 				"type": "string",
 				"defaultValue": "@activity('Web1').output.value"
+			},
+			"from": {
+				"type": "string",
+				"defaultValue": "2022-01-15"
+			},
+			"to": {
+				"type": "string",
+				"defaultValue": "2022-01-15"
+			},
+			"q": {
+				"type": "string",
+				"defaultValue": "Russia"
+			},
+			"sortBy": {
+				"type": "string",
+				"defaultValue": "popularity"
 			}
 		},
 		"annotations": [],
 		"type": "RestResource",
 		"typeProperties": {
 			"relativeUrl": {
-				"value": "https://newsapi.org/v2/everything?q=@linkedService().q&from=@linkedService().from&to=@linkedService().to&sortBy=@linkedService().sortBy&apiKey=@dataset().apiKey",
+				"value": "@concat('https://newsapi.org/v2/everything?q=', dataset().q, '&from=', dataset().from, '&to=', dataset().to, '&sortBy=', dataset().sortBy, '&apiKey=', dataset().apiKey)",
 				"type": "Expression"
 			}
 		},
