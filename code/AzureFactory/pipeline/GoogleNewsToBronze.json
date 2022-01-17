@@ -47,7 +47,10 @@
 						"referenceName": "RestResource1",
 						"type": "DatasetReference",
 						"parameters": {
-							"apiKey": "@activity('Web1').output.value"
+							"apiKey": {
+								"value": "@activity('Web1').output.value",
+								"type": "Expression"
+							}
 						}
 					}
 				],
@@ -66,7 +69,7 @@
 					"timeout": "7.00:00:00",
 					"retry": 0,
 					"retryIntervalInSeconds": 30,
-					"secureOutput": true,
+					"secureOutput": false,
 					"secureInput": false
 				},
 				"userProperties": [],
