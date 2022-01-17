@@ -1,0 +1,70 @@
+{
+	"name": "JsonGoogleNews",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureBlobStorageDev",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Json",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "GoogleNews/Results.json",
+				"folderPath": "bronze",
+				"container": "devdata"
+			}
+		},
+		"schema": {
+			"type": "object",
+			"properties": {
+				"status": {
+					"type": "string"
+				},
+				"totalResults": {
+					"type": "integer"
+				},
+				"articles": {
+					"type": "array",
+					"items": {
+						"type": "object",
+						"properties": {
+							"source": {
+								"type": "object",
+								"properties": {
+									"id": {
+										"type": "null"
+									},
+									"name": {
+										"type": "string"
+									}
+								}
+							},
+							"author": {
+								"type": "string"
+							},
+							"title": {
+								"type": "string"
+							},
+							"description": {
+								"type": "string"
+							},
+							"url": {
+								"type": "string"
+							},
+							"urlToImage": {
+								"type": "string"
+							},
+							"publishedAt": {
+								"type": "string"
+							},
+							"content": {
+								"type": "string"
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}

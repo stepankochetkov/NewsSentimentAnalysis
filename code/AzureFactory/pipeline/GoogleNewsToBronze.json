@@ -1,0 +1,100 @@
+{
+	"name": "GoogleNewsToBronze",
+	"properties": {
+		"activities": [
+			{
+				"name": "Google News",
+				"type": "Copy",
+				"dependsOn": [
+					{
+						"activity": "Web1",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "RestSource",
+						"httpRequestTimeout": "00:01:40",
+						"requestInterval": "00.00:00:00.010",
+						"requestMethod": "GET",
+						"paginationRules": {
+							"": "",
+							"supportRFC5988": "true"
+						}
+					},
+					"sink": {
+						"type": "JsonSink",
+						"storeSettings": {
+							"type": "AzureBlobStorageWriteSettings"
+						},
+						"formatSettings": {
+							"type": "JsonWriteSettings"
+						}
+					},
+					"enableStaging": false
+				},
+				"inputs": [
+					{
+						"referenceName": "RestResource1",
+						"type": "DatasetReference",
+						"parameters": {
+							"apiKey": {
+								"value": "@activity('Web1').output.value",
+								"type": "Expression"
+							},
+							"from": "2022-01-15",
+							"to": "2022-01-15",
+							"q": "russia OR russian",
+							"sortBy": "popularity",
+							"qInTitle": "russia OR russian",
+							"language": "en"
+						}
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "JsonGoogleNews",
+						"type": "DatasetReference"
+					}
+				]
+			},
+			{
+				"name": "Web1",
+				"type": "WebActivity",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": true,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"url": "https://keyvaultskdev0001.vault.azure.net/secrets/apiGoogleNews/b086b00aab1b43bda6995675b290fefc?api-version=7.0",
+					"method": "GET",
+					"authentication": {
+						"type": "MSI",
+						"resource": "https://vault.azure.net"
+					}
+				}
+			}
+		],
+		"variables": {
+			"ApiKey": {
+				"type": "String"
+			}
+		},
+		"annotations": []
+	}
+}

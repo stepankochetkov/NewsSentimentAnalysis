@@ -1,0 +1,48 @@
+{
+	"name": "RestResource1",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "LinkedServiceGoogleNews",
+			"type": "LinkedServiceReference"
+		},
+		"parameters": {
+			"apiKey": {
+				"type": "string",
+				"defaultValue": "@activity('Web1').output.value"
+			},
+			"from": {
+				"type": "string",
+				"defaultValue": "2022-01-15"
+			},
+			"to": {
+				"type": "string",
+				"defaultValue": "2022-01-15"
+			},
+			"q": {
+				"type": "string",
+				"defaultValue": "russia OR russian"
+			},
+			"sortBy": {
+				"type": "string",
+				"defaultValue": "popularity"
+			},
+			"qInTitle": {
+				"type": "string",
+				"defaultValue": "russia OR russian"
+			},
+			"language": {
+				"type": "string",
+				"defaultValue": "en"
+			}
+		},
+		"annotations": [],
+		"type": "RestResource",
+		"typeProperties": {
+			"relativeUrl": {
+				"value": "@concat('https://newsapi.org/v2/everything?', 'from=', dataset().from, '&to=', dataset().to, '&sortBy=', dataset().sortBy, '&qInTitle=', dataset().qInTitle, '&language=', dataset().language,'&apiKey=', dataset().apiKey)",
+				"type": "Expression"
+			}
+		},
+		"schema": []
+	}
+}
