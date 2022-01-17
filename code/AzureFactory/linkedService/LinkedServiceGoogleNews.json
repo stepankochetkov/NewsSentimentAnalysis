@@ -1,5 +1,6 @@
 {
 	"name": "LinkedServiceGoogleNews",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
 	"properties": {
 		"parameters": {
 			"q": {
@@ -19,7 +20,11 @@
 				"defaultValue": "popularity"
 			},
 			"apiKey": {
-				"type": "securestring"
+				"type": "securestring",
+				"defaultValue": {
+					"type": "SecureString",
+					"value": "**********"
+				}
 			}
 		},
 		"annotations": [],
