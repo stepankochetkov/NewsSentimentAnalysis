@@ -8,11 +8,13 @@
 				"q": "Russia",
 				"from": "2022-01-14",
 				"to": "2022-01-15",
-				"sortBy": "popularity",
-				"apiKey": {
-					"type": "SecureString",
-					"value": "**********"
-				}
+				"sortBy": "popularity"
+			}
+		},
+		"parameters": {
+			"apiKey": {
+				"type": "string",
+				"defaultValue": "@activity('Web1').output.value"
 			}
 		},
 		"annotations": [],
