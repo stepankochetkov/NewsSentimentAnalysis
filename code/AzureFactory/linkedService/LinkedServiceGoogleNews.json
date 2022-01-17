@@ -22,7 +22,7 @@
 		"annotations": [],
 		"type": "RestService",
 		"typeProperties": {
-			"url": "https://newsapi.org/v2/everything?q=@linkedService().q&from=@linkedService().from&to=@linkedService().to&sortBy=@linkedService().sortBy",
+			"url": "@{concat('https://newsapi.org/v2/everything?q=', linkedService().q, '&from=',linkedService().from, '&to=',linkedService().to,'&sortBy=',linkedService().sortBy)}",
 			"enableServerCertificateValidation": true,
 			"authenticationType": "Anonymous"
 		}
