@@ -31,11 +31,29 @@
 							"supportRFC5988": "true"
 						}
 					},
+					"sink": {
+						"type": "JsonSink",
+						"storeSettings": {
+							"type": "AzureBlobStorageWriteSettings"
+						},
+						"formatSettings": {
+							"type": "JsonWriteSettings"
+						}
+					},
 					"enableStaging": false
 				},
 				"inputs": [
 					{
 						"referenceName": "RestResource1",
+						"type": "DatasetReference",
+						"parameters": {
+							"apiKey": "@activity('Web1').output.value"
+						}
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "JsonGoogleNews",
 						"type": "DatasetReference"
 					}
 				]
