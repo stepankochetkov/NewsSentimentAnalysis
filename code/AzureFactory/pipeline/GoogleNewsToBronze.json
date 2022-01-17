@@ -52,7 +52,12 @@
 								"value": "@activity('Web1').output.value",
 								"type": "Expression"
 							},
-							"sortBy": "popularity"
+							"from": "2022-01-15",
+							"to": "2022-01-15",
+							"q": "russia OR russian",
+							"sortBy": "popularity",
+							"qInTitle": "russia OR russian",
+							"language": "en"
 						}
 					}
 				],
@@ -71,7 +76,7 @@
 					"timeout": "7.00:00:00",
 					"retry": 0,
 					"retryIntervalInSeconds": 30,
-					"secureOutput": false,
+					"secureOutput": true,
 					"secureInput": false
 				},
 				"userProperties": [],
