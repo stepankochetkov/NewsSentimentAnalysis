@@ -19,6 +19,12 @@
 		},
 		"annotations": [],
 		"type": "RestResource",
+		"typeProperties": {
+			"relativeUrl": {
+				"value": "@https://newsapi.org/v2/everything?q=linkedService().q&from=linkedService().from&to=linkedService().to&sortBy=linkedService().sortBy&apiKey=dataset().apiKey",
+				"type": "Expression"
+			}
+		},
 		"schema": []
 	}
 }
