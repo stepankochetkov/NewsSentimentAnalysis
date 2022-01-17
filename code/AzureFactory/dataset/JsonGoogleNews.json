@@ -10,7 +10,7 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobStorageLocation",
-				"fileName": "GoogleNews/",
+				"fileName": "GoogleNews/Results.json",
 				"folderPath": "bronze",
 				"container": "devdata"
 			}
