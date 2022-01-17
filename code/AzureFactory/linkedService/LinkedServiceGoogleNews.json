@@ -17,9 +17,6 @@
 			"sortBy": {
 				"type": "string",
 				"defaultValue": "popularity"
-			},
-			"apiKey": {
-				"type": "string"
 			}
 		},
 		"annotations": [],
