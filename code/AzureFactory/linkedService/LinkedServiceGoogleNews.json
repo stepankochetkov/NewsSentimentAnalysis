@@ -1,0 +1,33 @@
+{
+	"name": "LinkedServiceGoogleNews",
+	"properties": {
+		"parameters": {
+			"q": {
+				"type": "string",
+				"defaultValue": "Russia"
+			},
+			"from": {
+				"type": "string",
+				"defaultValue": "2022-01-14"
+			},
+			"to": {
+				"type": "string",
+				"defaultValue": "2022-01-15"
+			},
+			"sortBy": {
+				"type": "string",
+				"defaultValue": "popularity"
+			},
+			"apiKey": {
+				"type": "securestring"
+			}
+		},
+		"annotations": [],
+		"type": "RestService",
+		"typeProperties": {
+			"url": "https://newsapi.org/v2/everything?q=@linkedService().q&from=@linkedService().from&to=@linkedService().to&sortBy=@linkedService().sortBy&apiKey=linkedService().apiKey",
+			"enableServerCertificateValidation": true,
+			"authenticationType": "Anonymous"
+		}
+	}
+}
