@@ -80,7 +80,7 @@
 				],
 				"outputs": [
 					{
-						"referenceName": "JsonGoogleNews",
+						"referenceName": "SinkGoogleNewsJSON",
 						"type": "DatasetReference",
 						"parameters": {
 							"qInTitle": {
