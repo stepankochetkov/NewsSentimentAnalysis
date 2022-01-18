@@ -7,7 +7,7 @@
 				"type": "Copy",
 				"dependsOn": [
 					{
-						"activity": "Web1",
+						"activity": "WebKeyVault",
 						"dependencyConditions": [
 							"Succeeded"
 						]
@@ -56,7 +56,7 @@
 								"type": "Expression"
 							},
 							"apiKey": {
-								"value": "@activity('Web1').output.value",
+								"value": "@activity('WebKeyVault').output.value",
 								"type": "Expression"
 							},
 							"qInTitle": {
@@ -100,7 +100,8 @@
 				]
 			},
 			{
-				"name": "Web1",
+				"name": "WebKeyVault",
+				"description": "",
 				"type": "WebActivity",
 				"dependsOn": [],
 				"policy": {
