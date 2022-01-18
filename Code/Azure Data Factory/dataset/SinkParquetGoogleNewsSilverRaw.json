@@ -5,6 +5,17 @@
 			"referenceName": "AzureBlobStorageDev",
 			"type": "LinkedServiceReference"
 		},
+		"parameters": {
+			"qInTitle": {
+				"type": "string"
+			},
+			"from": {
+				"type": "string"
+			},
+			"to": {
+				"type": "string"
+			}
+		},
 		"annotations": [],
 		"type": "Parquet",
 		"typeProperties": {
