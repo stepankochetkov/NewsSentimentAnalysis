@@ -17,22 +17,28 @@
 		},
 		"parameters": {
 			"from": {
-				"type": "string"
+				"type": "string",
+				"defaultValue": "@pipeline().parameters.from"
 			},
 			"to": {
-				"type": "string"
+				"type": "string",
+				"defaultValue": "@pipeline().parameters.to"
 			},
 			"apiKey": {
-				"type": "string"
+				"type": "string",
+				"defaultValue": "@pipeline().parameters.apiKey"
 			},
 			"qInTitle": {
-				"type": "string"
+				"type": "string",
+				"defaultValue": "@pipeline().parameters.qInTitle"
 			},
 			"language": {
-				"type": "string"
+				"type": "string",
+				"defaultValue": "@pipeline().parameters.language"
 			},
 			"sortBy": {
-				"type": "string"
+				"type": "string",
+				"defaultValue": "@pipeline().parameters.sortBy"
 			}
 		},
 		"annotations": [],
