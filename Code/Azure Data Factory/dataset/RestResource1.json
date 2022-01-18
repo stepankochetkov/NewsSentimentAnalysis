@@ -32,7 +32,7 @@
 		"type": "RestResource",
 		"typeProperties": {
 			"relativeUrl": {
-				"value": "@concat('https://newsapi.org/v2/everything?', 'from=', dataset().from, '&to=', dataset().to, '&qInTitle=', dataset().qInTitle, '&sortBy=', dataset().sortBy, '&language=', dataset().language, '&apiKey=', dataset().apiKey)",
+				"value": "@concat('https://newsapi.org/v2/everything?', 'from=', dataset().from, '&to=', dataset().to, '&qInTitle=', dataset().qInTitle, '&sortBy=', dataset().sortBy, '&language=', dataset().language, '&pageSize=', dataset().pageSize, '&apiKey=', dataset().apiKey)",
 				"type": "Expression"
 			}
 		},

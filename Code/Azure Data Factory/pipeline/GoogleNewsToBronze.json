@@ -70,6 +70,10 @@
 							"sortBy": {
 								"value": "@pipeline().parameters.sortBy",
 								"type": "Expression"
+							},
+							"pageSize": {
+								"value": "@pipeline().parameters.pageSize",
+								"type": "Expression"
 							}
 						}
 					}
