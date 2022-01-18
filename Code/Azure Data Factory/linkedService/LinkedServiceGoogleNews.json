@@ -1,13 +1,38 @@
 {
 	"name": "LinkedServiceGoogleNews",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
 	"properties": {
+		"parameters": {
+			"q": {
+				"type": "string",
+				"defaultValue": "Russia"
+			},
+			"from": {
+				"type": "string",
+				"defaultValue": "2022-01-14"
+			},
+			"to": {
+				"type": "string",
+				"defaultValue": "2022-01-15"
+			},
+			"sortBy": {
+				"type": "string",
+				"defaultValue": "popularity"
+			},
+			"apiKey": {
+				"type": "securestring",
+				"defaultValue": {
+					"type": "SecureString",
+					"value": "**********"
+				}
+			}
+		},
 		"annotations": [],
 		"type": "RestService",
 		"typeProperties": {
-			"url": "https://newsapi.org/v2/everything?",
+			"url": "https://newsapi.org/v2/everything?q=@linkedService().q&from=@linkedService().from&to=@linkedService().to&sortBy=@linkedService().sortBy&apiKey=linkedService().apiKey",
 			"enableServerCertificateValidation": true,
 			"authenticationType": "Anonymous"
 		}
-	},
-	"type": "Microsoft.DataFactory/factories/linkedservices"
+	}
 }
