@@ -21,7 +21,10 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobStorageLocation",
-				"fileName": "Google News/Results.parquet",
+				"fileName": {
+					"value": "@concat('Google News/', dataset().qInTitle, '/', dataset().from, '/Results_', dataset().qInTitle,'_',dataset().from, '.parquet')",
+					"type": "Expression"
+				},
 				"folderPath": "silver raw",
 				"container": "devdata"
 			},
