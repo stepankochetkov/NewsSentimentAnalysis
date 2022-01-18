@@ -44,7 +44,7 @@
 				},
 				"inputs": [
 					{
-						"referenceName": "SourceGoogleNews",
+						"referenceName": "SourceRESTGoogleNews",
 						"type": "DatasetReference",
 						"parameters": {
 							"from": {

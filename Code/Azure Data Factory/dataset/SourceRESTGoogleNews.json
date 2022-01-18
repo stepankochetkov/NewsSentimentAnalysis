@@ -1,5 +1,5 @@
 {
-	"name": "SourceGoogleNews",
+	"name": "SourceRESTGoogleNews",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "LinkedServiceGoogleNews",
