@@ -1,0 +1,70 @@
+{
+	"name": "BronzeToSilverRaw",
+	"properties": {
+		"activities": [
+			{
+				"name": "Copy Bronze to Silver Raw Google News",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "JsonSource",
+						"storeSettings": {
+							"type": "AzureBlobStorageReadSettings",
+							"recursive": true,
+							"enablePartitionDiscovery": false
+						},
+						"formatSettings": {
+							"type": "JsonReadSettings"
+						}
+					},
+					"sink": {
+						"type": "ParquetSink",
+						"storeSettings": {
+							"type": "AzureBlobStorageWriteSettings"
+						},
+						"formatSettings": {
+							"type": "ParquetWriteSettings"
+						}
+					},
+					"enableStaging": false
+				},
+				"inputs": [
+					{
+						"referenceName": "SinkJSONGoogleNews",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "SinkParquetGoogleNewsSilverRaw",
+						"type": "DatasetReference"
+					}
+				]
+			}
+		],
+		"parameters": {
+			"from": {
+				"type": "string",
+				"defaultValue": "2022-01-17"
+			},
+			"to": {
+				"type": "string",
+				"defaultValue": "2022-01-17"
+			},
+			"qInTitle": {
+				"type": "string",
+				"defaultValue": "Russia OR Russian"
+			}
+		},
+		"annotations": []
+	}
+}

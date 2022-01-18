@@ -1,0 +1,21 @@
+{
+	"name": "SinkParquetGoogleNewsSilverRaw",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureBlobStorageDev",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Parquet",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "Google News/Results.parquet",
+				"folderPath": "silver raw",
+				"container": "devdata"
+			},
+			"compressionCodec": "snappy"
+		},
+		"schema": []
+	}
+}
