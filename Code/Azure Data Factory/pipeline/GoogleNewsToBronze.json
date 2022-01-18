@@ -81,7 +81,21 @@
 				"outputs": [
 					{
 						"referenceName": "JsonGoogleNews",
-						"type": "DatasetReference"
+						"type": "DatasetReference",
+						"parameters": {
+							"qInTitle": {
+								"value": "@pipeline().parameters.qInTitle",
+								"type": "Expression"
+							},
+							"from": {
+								"value": "@pipeline().parameters.from",
+								"type": "Expression"
+							},
+							"to": {
+								"value": "@pipeline().parameters.to",
+								"type": "Expression"
+							}
+						}
 					}
 				]
 			},
