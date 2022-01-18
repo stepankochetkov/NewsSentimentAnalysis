@@ -118,7 +118,7 @@
 			},
 			"qInTitle": {
 				"type": "string",
-				"defaultValue": "russia OR russian"
+				"defaultValue": "Russia OR Russian"
 			},
 			"language": {
 				"type": "string",
