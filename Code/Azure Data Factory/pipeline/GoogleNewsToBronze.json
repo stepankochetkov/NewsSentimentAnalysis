@@ -46,19 +46,7 @@
 				"inputs": [
 					{
 						"referenceName": "RestResource1",
-						"type": "DatasetReference",
-						"parameters": {
-							"apiKey": {
-								"value": "@activity('Web1').output.value",
-								"type": "Expression"
-							},
-							"from": "2022-01-15",
-							"to": "2022-01-15",
-							"q": "russia OR russian",
-							"sortBy": "popularity",
-							"qInTitle": "russia OR russian",
-							"language": "en"
-						}
+						"type": "DatasetReference"
 					}
 				],
 				"outputs": [
@@ -90,9 +78,26 @@
 				}
 			}
 		],
-		"variables": {
-			"ApiKey": {
-				"type": "String"
+		"parameters": {
+			"from": {
+				"type": "string",
+				"defaultValue": "2022-01-17"
+			},
+			"to": {
+				"type": "string",
+				"defaultValue": "2022-01-17"
+			},
+			"qInTitle": {
+				"type": "string",
+				"defaultValue": "russia OR russian"
+			},
+			"language": {
+				"type": "string",
+				"defaultValue": "en"
+			},
+			"sortBy": {
+				"type": "string",
+				"defaultValue": "popularity"
 			}
 		},
 		"annotations": []

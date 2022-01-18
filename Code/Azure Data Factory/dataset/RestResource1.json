@@ -3,43 +3,43 @@
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "LinkedServiceGoogleNews",
-			"type": "LinkedServiceReference"
+			"type": "LinkedServiceReference",
+			"parameters": {
+				"q": "Russia",
+				"from": "2022-01-14",
+				"to": "2022-01-15",
+				"sortBy": "popularity",
+				"apiKey": {
+					"type": "SecureString",
+					"value": "**********"
+				}
+			}
 		},
 		"parameters": {
-			"apiKey": {
-				"type": "string",
-				"defaultValue": "@activity('Web1').output.value"
-			},
 			"from": {
-				"type": "string",
-				"defaultValue": "2022-01-15"
+				"type": "string"
 			},
 			"to": {
-				"type": "string",
-				"defaultValue": "2022-01-15"
+				"type": "string"
 			},
-			"q": {
-				"type": "string",
-				"defaultValue": "russia OR russian"
-			},
-			"sortBy": {
-				"type": "string",
-				"defaultValue": "popularity"
+			"apiKey": {
+				"type": "string"
 			},
 			"qInTitle": {
-				"type": "string",
-				"defaultValue": "russia OR russian"
+				"type": "string"
 			},
 			"language": {
-				"type": "string",
-				"defaultValue": "en"
+				"type": "string"
+			},
+			"sortBy": {
+				"type": "string"
 			}
 		},
 		"annotations": [],
 		"type": "RestResource",
 		"typeProperties": {
 			"relativeUrl": {
-				"value": "@concat('https://newsapi.org/v2/everything?', 'from=', dataset().from, '&to=', dataset().to, '&sortBy=', dataset().sortBy, '&qInTitle=', dataset().qInTitle, '&language=', dataset().language,'&apiKey=', dataset().apiKey)",
+				"value": "@concat('https://newsapi.org/v2/everything?', 'from=', dataset().from, '&to=', dataset().to, '&qInTitle=', dataset().qInTitle, '&sortBy=', dataset().sortBy, '&language=', dataset().language, '&apiKey=', dataset().apiKey)",
 				"type": "Expression"
 			}
 		},
