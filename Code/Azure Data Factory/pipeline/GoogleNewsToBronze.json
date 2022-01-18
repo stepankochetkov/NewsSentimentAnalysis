@@ -28,7 +28,6 @@
 						"requestInterval": "00.00:00:00.010",
 						"requestMethod": "GET",
 						"paginationRules": {
-							"": "",
 							"supportRFC5988": "true"
 						}
 					},
@@ -46,7 +45,33 @@
 				"inputs": [
 					{
 						"referenceName": "RestResource1",
-						"type": "DatasetReference"
+						"type": "DatasetReference",
+						"parameters": {
+							"from": {
+								"value": "@pipeline().parameters.from",
+								"type": "Expression"
+							},
+							"to": {
+								"value": "@pipeline().parameters.to",
+								"type": "Expression"
+							},
+							"apiKey": {
+								"value": "@activity('Web1').output.value",
+								"type": "Expression"
+							},
+							"qInTitle": {
+								"value": "@pipeline().parameters.qInTitle",
+								"type": "Expression"
+							},
+							"language": {
+								"value": "@pipeline().parameters.language",
+								"type": "Expression"
+							},
+							"sortBy": {
+								"value": "@pipeline().parameters.sortBy",
+								"type": "Expression"
+							}
+						}
 					}
 				],
 				"outputs": [
@@ -98,6 +123,10 @@
 			"sortBy": {
 				"type": "string",
 				"defaultValue": "popularity"
+			},
+			"pageSize": {
+				"type": "string",
+				"defaultValue": "100"
 			}
 		},
 		"annotations": []

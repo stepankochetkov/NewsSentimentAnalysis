@@ -23,6 +23,9 @@
 			},
 			"sortBy": {
 				"type": "string"
+			},
+			"pageSize": {
+				"type": "string"
 			}
 		},
 		"annotations": [],
