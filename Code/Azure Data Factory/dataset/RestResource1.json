@@ -3,42 +3,26 @@
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "LinkedServiceGoogleNews",
-			"type": "LinkedServiceReference",
-			"parameters": {
-				"q": "Russia",
-				"from": "2022-01-14",
-				"to": "2022-01-15",
-				"sortBy": "popularity",
-				"apiKey": {
-					"type": "SecureString",
-					"value": "**********"
-				}
-			}
+			"type": "LinkedServiceReference"
 		},
 		"parameters": {
 			"from": {
-				"type": "string",
-				"defaultValue": "@pipeline().parameters.from"
+				"type": "string"
 			},
 			"to": {
-				"type": "string",
-				"defaultValue": "@pipeline().parameters.to"
+				"type": "string"
 			},
 			"apiKey": {
-				"type": "string",
-				"defaultValue": "@pipeline().parameters.apiKey"
+				"type": "string"
 			},
 			"qInTitle": {
-				"type": "string",
-				"defaultValue": "@pipeline().parameters.qInTitle"
+				"type": "string"
 			},
 			"language": {
-				"type": "string",
-				"defaultValue": "@pipeline().parameters.language"
+				"type": "string"
 			},
 			"sortBy": {
-				"type": "string",
-				"defaultValue": "@pipeline().parameters.sortBy"
+				"type": "string"
 			}
 		},
 		"annotations": [],
