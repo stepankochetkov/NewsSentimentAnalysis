@@ -5,12 +5,26 @@
 			"referenceName": "AzureBlobStorageDev",
 			"type": "LinkedServiceReference"
 		},
+		"parameters": {
+			"qInTitle": {
+				"type": "string"
+			},
+			"from": {
+				"type": "string"
+			},
+			"to": {
+				"type": "string"
+			}
+		},
 		"annotations": [],
 		"type": "Json",
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobStorageLocation",
-				"fileName": "GoogleNews/Results.json",
+				"fileName": {
+					"value": "@concat('Google News/', dataset().qInTitle, '/', dataset().from, '/Results_', dataset().qInTitle,'_',dataset().from, '.json')",
+					"type": "Expression"
+				},
 				"folderPath": "bronze",
 				"container": "devdata"
 			}
