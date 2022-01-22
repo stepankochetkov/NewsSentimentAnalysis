@@ -43,3 +43,7 @@ df = spark.read.parquet("wasbs://devdata@storageskdev0001.blob.core.windows.net/
 # COMMAND ----------
 
 display(df)
+
+# COMMAND ----------
+
+dbutils.secrets.get(scope="keyvaultskdev0001", name="BlobStorageAccountKeyDev") 
