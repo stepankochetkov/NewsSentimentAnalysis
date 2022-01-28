@@ -3,15 +3,7 @@ from pyspark.sql.types import *
 
 # COMMAND ----------
 
-storageAccountName = "storageskdev0001"
-storageAccountAccessKey = "."
-containerName = "devdata"
 
-# COMMAND ----------
-
-spark.conf.set(
-  f"fs.azure.account.key.{storageAccountName}.blob.core.windows.net",
-  f"{storageAccountAccessKey}")
 
 # COMMAND ----------
 
@@ -46,4 +38,4 @@ display(df)
 
 # COMMAND ----------
 
-dbutils.secrets.get(scope="keyvaultskdev0001", name="BlobStorageAccountKeyDev") 
+
