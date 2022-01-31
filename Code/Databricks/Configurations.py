@@ -1,6 +1,6 @@
 # Databricks notebook source
 storageAccountName = "storageskdev0001"
-storageAccountAccessKey = dbutils.secrets.get(scope="keyvaultskdev0001", name="BlobStorageAccountKeyDev")
+storageAccountAccessKey = dbutils.secrets.get(scope="keyvaultskdev0001", key="BlobStorageAccountKeyDev")
 containerName = "devdata"
 
 # COMMAND ----------
