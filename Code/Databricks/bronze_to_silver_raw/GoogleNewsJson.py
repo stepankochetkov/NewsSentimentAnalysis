@@ -11,6 +11,12 @@ from pyspark.sql.functions import explode, col
 
 # COMMAND ----------
 
+spark.conf.set("spark.sql.sources.commitProtocolClass", "org.apache.spark.sql.execution.datasources.SQLHadoopMapReduceCommitProtocol")
+spark.conf.set("parquet.enable.summary-metadata", "false")
+spark.conf.set("mapreduce.fileoutputcommitter.marksuccessfuljobs", "false")
+
+# COMMAND ----------
+
 schemaGoogleNews = StructType(fields=[
     StructField("articles", ArrayType(
         StructType([
@@ -32,7 +38,7 @@ bronzePath = "wasbs://devdata@storageskdev0001.blob.core.windows.net/bronze/Goog
 
 # COMMAND ----------
 
-silverRawPath = "wasbs://devdata@storageskdev0001.blob.core.windows.net/silver raw/Google News/Russia OR Russian/2022-01-17/Results_Russia OR Russian_2022-01-17.parquet"
+silverRawPath = "wasbs://devdata@storageskdev0001.blob.core.windows.net/silver raw/Google News/Russia OR Russian/2022-01-17/Results_Russia OR Russian_2022-01-17"
 
 # COMMAND ----------
 
@@ -45,4 +51,4 @@ flatten_df = articles.select(col("source.*"), "author", "title", "description", 
 
 # COMMAND ----------
 
-flatten_df.write.mode("overwrite").parquet(silverRawPath)
+flatten_df.write.format("delta").parquet(silverRawPath)
