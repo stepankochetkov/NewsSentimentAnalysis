@@ -18,19 +18,14 @@ spark.conf.set("mapreduce.fileoutputcommitter.marksuccessfuljobs", "false")
 # COMMAND ----------
 
 schemaGoogleNews = StructType(fields=[
-    StructField("articles", ArrayType(
-        StructType([
-            StructField("source", 
-                        StructType([StructField("id", StringType(), True),
-                                    StructField("name", StringType(),True)])),
-            StructField("author", StringType(), False),
-            StructField("title", StringType(), False),
-            StructField("description", StringType(), False),
-            StructField("urlToImage", StringType(), False),
-            StructField("publishedAt", StringType(), False),
-            StructField("content", StringType(), False)]))),
-    StructField("status", StringType(), False),
-    StructField("totalResults", IntegerType(), False),])
+    StructField("sourceId", StringType(), False),
+    StructField("sourceName", StringType(), False),
+    StructField("author", StringType(), False),
+    StructField("title", StringType(), False),
+    StructField("description", StringType(), False),
+    StructField("urlToImage", StringType(), False),
+    StructField("publishedAt", StringType(), False),
+    StructField("content", StringType(), False)])
 
 # COMMAND ----------
 
@@ -42,7 +37,8 @@ silverRawPath = "wasbs://devdata@storageskdev0001.blob.core.windows.net/silver r
 
 # COMMAND ----------
 
-df = spark.read.json(bronzePath, schema=schemaGoogleNews)
+# df = spark.read.json(bronzePath, schema=schemaGoogleNews)
+df = spark.read.json(bronzePath)
 
 # COMMAND ----------
 
@@ -51,4 +47,8 @@ flatten_df = articles.select(col("source.*"), "author", "title", "description", 
 
 # COMMAND ----------
 
-flatten_df.write.format("delta").parquet(silverRawPath)
+df_output = spark.createDataFrame(flatten_df.rdd, schema=schemaGoogleNews)
+
+# COMMAND ----------
+
+df_output.write.mode('overwrite').parquet(silverRawPath)
