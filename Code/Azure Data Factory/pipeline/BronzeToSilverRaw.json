@@ -3,8 +3,9 @@
 	"properties": {
 		"activities": [
 			{
-				"name": "Copy Bronze to Silver Raw Google News",
-				"type": "Copy",
+				"name": "DB_BR_TO_SR_GOOGLE_NEWS",
+				"description": "The databricks notebook used to parse JSON Google News files into a parquet file",
+				"type": "DatabricksNotebook",
 				"dependsOn": [],
 				"policy": {
 					"timeout": "7.00:00:00",
@@ -15,172 +16,12 @@
 				},
 				"userProperties": [],
 				"typeProperties": {
-					"source": {
-						"type": "JsonSource",
-						"storeSettings": {
-							"type": "AzureBlobStorageReadSettings",
-							"recursive": true,
-							"enablePartitionDiscovery": false
-						},
-						"formatSettings": {
-							"type": "JsonReadSettings"
-						}
-					},
-					"sink": {
-						"type": "ParquetSink",
-						"storeSettings": {
-							"type": "AzureBlobStorageWriteSettings"
-						},
-						"formatSettings": {
-							"type": "ParquetWriteSettings"
-						}
-					},
-					"enableStaging": false,
-					"translator": {
-						"type": "TabularTranslator",
-						"mappings": [
-							{
-								"source": {
-									"path": "$['status']"
-								},
-								"sink": {
-									"name": "status",
-									"type": "String"
-								}
-							},
-							{
-								"source": {
-									"path": "$['totalResults']"
-								},
-								"sink": {
-									"name": "totalResults",
-									"type": "Int64"
-								}
-							},
-							{
-								"source": {
-									"path": "$['articles'][0]['source']['id']"
-								},
-								"sink": {
-									"name": "id",
-									"type": "String"
-								}
-							},
-							{
-								"source": {
-									"path": "$['articles'][0]['source']['name']"
-								},
-								"sink": {
-									"name": "name",
-									"type": "String"
-								}
-							},
-							{
-								"source": {
-									"path": "$['articles'][0]['author']"
-								},
-								"sink": {
-									"name": "author",
-									"type": "String"
-								}
-							},
-							{
-								"source": {
-									"path": "$['articles'][0]['title']"
-								},
-								"sink": {
-									"name": "title",
-									"type": "String"
-								}
-							},
-							{
-								"source": {
-									"path": "$['articles'][0]['description']"
-								},
-								"sink": {
-									"name": "description",
-									"type": "String"
-								}
-							},
-							{
-								"source": {
-									"path": "$['articles'][0]['url']"
-								},
-								"sink": {
-									"name": "url",
-									"type": "String"
-								}
-							},
-							{
-								"source": {
-									"path": "$['articles'][0]['urlToImage']"
-								},
-								"sink": {
-									"name": "urlToImage",
-									"type": "String"
-								}
-							},
-							{
-								"source": {
-									"path": "$['articles'][0]['publishedAt']"
-								},
-								"sink": {
-									"name": "publishedAt",
-									"type": "DateTime"
-								}
-							},
-							{
-								"source": {
-									"path": "$['articles'][0]['content']"
-								},
-								"sink": {
-									"name": "content",
-									"type": "String"
-								}
-							}
-						]
-					}
+					"notebookPath": "/Repos/stepankochetkov@gmail.com/news-russia/Code/Databricks/bronze_to_silver_raw/GoogleNewsJson"
 				},
-				"inputs": [
-					{
-						"referenceName": "SinkJSONGoogleNews",
-						"type": "DatasetReference",
-						"parameters": {
-							"qInTitle": {
-								"value": "@pipeline().parameters.qInTitle",
-								"type": "Expression"
-							},
-							"from": {
-								"value": "@pipeline().parameters.from",
-								"type": "Expression"
-							},
-							"to": {
-								"value": "@pipeline().parameters.to",
-								"type": "Expression"
-							}
-						}
-					}
-				],
-				"outputs": [
-					{
-						"referenceName": "SinkParquetGoogleNewsSilverRaw",
-						"type": "DatasetReference",
-						"parameters": {
-							"qInTitle": {
-								"value": "@pipeline().parameters.qInTitle",
-								"type": "Expression"
-							},
-							"from": {
-								"value": "@pipeline().parameters.from",
-								"type": "Expression"
-							},
-							"to": {
-								"value": "@pipeline().parameters.to",
-								"type": "Expression"
-							}
-						}
-					}
-				]
+				"linkedServiceName": {
+					"referenceName": "LS_DB_DEV",
+					"type": "LinkedServiceReference"
+				}
 			}
 		],
 		"parameters": {
