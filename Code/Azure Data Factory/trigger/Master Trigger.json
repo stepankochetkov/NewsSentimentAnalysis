@@ -1,0 +1,25 @@
+{
+	"name": "Master Trigger",
+	"properties": {
+		"description": "Trigger data integration once a day",
+		"annotations": [],
+		"runtimeState": "Started",
+		"pipelines": [
+			{
+				"pipelineReference": {
+					"referenceName": "Master",
+					"type": "PipelineReference"
+				}
+			}
+		],
+		"type": "ScheduleTrigger",
+		"typeProperties": {
+			"recurrence": {
+				"frequency": "Day",
+				"interval": 1,
+				"startTime": "2022-03-01T23:55:00",
+				"timeZone": "Mountain Standard Time"
+			}
+		}
+	}
+}

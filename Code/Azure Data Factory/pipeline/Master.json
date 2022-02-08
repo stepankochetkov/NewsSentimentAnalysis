@@ -1,0 +1,44 @@
+{
+	"name": "Master",
+	"properties": {
+		"description": "Master pipeline that orchestrates data integration",
+		"activities": [
+			{
+				"name": "PL_Source_to_BR_GoogleNews",
+				"description": "Pipeline to get the source Google news data and put it into Bronze",
+				"type": "ExecutePipeline",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "BronzeToSilverRaw",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "PL_BR_to_SR_GoogleNews",
+				"description": "Pipeline that parses GoogleNews data from BR to SR",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "PL_Source_to_BR_GoogleNews",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "SourceToBronze",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			}
+		],
+		"annotations": []
+	}
+}
