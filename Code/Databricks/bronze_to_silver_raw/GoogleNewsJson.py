@@ -51,4 +51,4 @@ df_output = spark.createDataFrame(flatten_df.rdd, schema=schemaGoogleNews)
 
 # COMMAND ----------
 
-df_output.write.mode('overwrite').parquet(silverRawPath)
+df_output.write.format("delta").mode('overwrite').parquet(silverRawPath)
