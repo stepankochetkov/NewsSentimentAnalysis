@@ -1,5 +1,14 @@
 # Databricks notebook source
+# MAGIC %md ## Imports
+
+# COMMAND ----------
+
 from pyspark.sql.functions import explode, col
+from pyspark.sql.types import *
+
+# COMMAND ----------
+
+# MAGIC %md ## Configs & Helper Functions
 
 # COMMAND ----------
 
@@ -11,44 +20,72 @@ from pyspark.sql.functions import explode, col
 
 # COMMAND ----------
 
-spark.conf.set("spark.sql.sources.commitProtocolClass", "org.apache.spark.sql.execution.datasources.SQLHadoopMapReduceCommitProtocol")
-spark.conf.set("parquet.enable.summary-metadata", "false")
-spark.conf.set("mapreduce.fileoutputcommitter.marksuccessfuljobs", "false")
+# MAGIC %md ## Parameters
 
 # COMMAND ----------
 
+dbutils.widgets.text("source", "Google News", "Source:")
+dbutils.widgets.text("topic", "Russia OR Russian", "Topic:")
+dbutils.widgets.text("date", "2022-01-17", "Date: YYYY-MM-DD")
+
+# COMMAND ----------
+
+source = dbutils.widgets.get("source")
+topic = dbutils.widgets.get("topic")
+date = dbutils.widgets.get("date")
+
+# COMMAND ----------
+
+# MAGIC %md ## Schema
+
+# COMMAND ----------
+
+# Ouput Dataframe Schema
 schemaGoogleNews = StructType(fields=[
-    StructField("sourceId", StringType(), False),
-    StructField("sourceName", StringType(), False),
-    StructField("author", StringType(), False),
-    StructField("title", StringType(), False),
-    StructField("description", StringType(), False),
-    StructField("urlToImage", StringType(), False),
-    StructField("publishedAt", StringType(), False),
-    StructField("content", StringType(), False)])
+    StructField("sourceId", StringType(), True),
+    StructField("sourceName", StringType(), True),
+    StructField("author", StringType(), True),
+    StructField("title", StringType(), True),
+    StructField("description", StringType(), True),
+    StructField("urlToImage", StringType(), True),
+    StructField("publishedAt", StringType(), True),
+    StructField("content", StringType(), True)])
 
 # COMMAND ----------
 
-bronzePath = "wasbs://devdata@storageskdev0001.blob.core.windows.net/bronze/Google News/Russia OR Russian/2022-01-17/Results_Russia OR Russian_2022-01-17.json"
+# MAGIC %md ## Main Program
 
 # COMMAND ----------
 
-silverRawPath = "wasbs://devdata@storageskdev0001.blob.core.windows.net/silver raw/Google News/Russia OR Russian/2022-01-17/Results_Russia OR Russian_2022-01-17"
+# Bronze Configurations
+bronzePath = f'wasbs://{bronzeContainerName}@{bronzeStorageAccountName}.blob.core.windows.net/bronze/'
+bronzeBlobServiceClient = create_blob_service_client(bronzeConnectionString)
+bronzeBlobName = f'bronze/{source}/{topic}/{date}/Results_{topic}_{date}.json'
+print(bronzeBlobName)
+bronzeBlobClient = create_blob_client(bronzeBlobServiceClient, bronzeContainerName, bronzeBlobName)
 
 # COMMAND ----------
 
-# df = spark.read.json(bronzePath, schema=schemaGoogleNews)
-df = spark.read.json(bronzePath)
+# Silver Raw Confugurations
+silverRawPath = f'wasbs://{silverRawContainerName}@{silverRawStorageAccountName}.blob.core.windows.net/silver raw/'
+silverRawBlobServiceClient = create_blob_service_client(silverRawConnectionString)
+silverRawBlobName = f'silver raw/{source}/{topic}/{date}/Results_{topic}_{date}.parquet'
+print(silverRawBlobName)
+silverRawBlobClient = create_blob_client(silverRawBlobServiceClient, silverRawContainerName, silverRawBlobName)
 
 # COMMAND ----------
 
+# Get source data
+df = download_json(bronzeBlobClient)
+
+# COMMAND ----------
+
+# Flat the dataframe
 articles = df.select(explode("articles").alias("articles")).select("articles.*")
-flatten_df = articles.select(col("source.*"), "author", "title", "description", "urlToImage", "publishedAt", "content").toDF("sourceId", "sourceName", "author", "title", "description", "urlToImage", "publishedAt", "content")
+df_flat = articles.select(col("source.*"), "author", "title", "description", "urlToImage", "publishedAt", "content").toDF("sourceId", "sourceName", "author", "title", "description", "urlToImage", "publishedAt", "content")
+df_output = spark.createDataFrame(df_flat.rdd, schema=schemaGoogleNews)
 
 # COMMAND ----------
 
-df_output = spark.createDataFrame(flatten_df.rdd, schema=schemaGoogleNews)
-
-# COMMAND ----------
-
-df_output.write.format("delta").mode('overwrite').parquet(silverRawPath)
+# Upload data to blob storage
+upload_parquet(silverRawBlobClient, df_output)
