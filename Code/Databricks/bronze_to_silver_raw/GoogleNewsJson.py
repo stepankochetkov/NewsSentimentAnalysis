@@ -4,6 +4,7 @@
 # COMMAND ----------
 
 from pyspark.sql.functions import explode, col
+from pyspark.sql.types import *
 
 # COMMAND ----------
 
@@ -41,14 +42,14 @@ date = dbutils.widgets.get("date")
 
 # Ouput Dataframe Schema
 schemaGoogleNews = StructType(fields=[
-    StructField("sourceId", StringType(), False),
-    StructField("sourceName", StringType(), False),
-    StructField("author", StringType(), False),
-    StructField("title", StringType(), False),
-    StructField("description", StringType(), False),
-    StructField("urlToImage", StringType(), False),
-    StructField("publishedAt", StringType(), False),
-    StructField("content", StringType(), False)])
+    StructField("sourceId", StringType(), True),
+    StructField("sourceName", StringType(), True),
+    StructField("author", StringType(), True),
+    StructField("title", StringType(), True),
+    StructField("description", StringType(), True),
+    StructField("urlToImage", StringType(), True),
+    StructField("publishedAt", StringType(), True),
+    StructField("content", StringType(), True)])
 
 # COMMAND ----------
 
@@ -59,16 +60,18 @@ schemaGoogleNews = StructType(fields=[
 # Bronze Configurations
 bronzePath = f'wasbs://{bronzeContainerName}@{bronzeStorageAccountName}.blob.core.windows.net/bronze/'
 bronzeBlobServiceClient = create_blob_service_client(bronzeConnectionString)
-bronzeBlobName = bronzePath + f'{source}/{topic}/{date}/Results_{topic}_{date}.json'
-bronzeBlobClient = create_blob_client(bronzeBlobServiceClient, bronzeBlobName)
+bronzeBlobName = f'bronze/{source}/{topic}/{date}/Results_{topic}_{date}.json'
+print(bronzeBlobName)
+bronzeBlobClient = create_blob_client(bronzeBlobServiceClient, bronzeContainerName, bronzeBlobName)
 
 # COMMAND ----------
 
 # Silver Raw Confugurations
 silverRawPath = f'wasbs://{silverRawContainerName}@{silverRawStorageAccountName}.blob.core.windows.net/silver raw/'
-silverRawBlobServiceClient = client_blob_service_client(silverRawConnectionString)
-silverRawBlobName = silverRawPath + f'{source}/{topic}/{date}/Results_{topic}_{date}.parquet'
-silverRawBlobClient = create_blob_client(silverRawBlobServiceClient, silverRawBlobName)
+silverRawBlobServiceClient = create_blob_service_client(silverRawConnectionString)
+silverRawBlobName = f'silver raw/{source}/{topic}/{date}/Results_{topic}_{date}.parquet'
+print(silverRawBlobName)
+silverRawBlobClient = create_blob_client(silverRawBlobServiceClient, silverRawContainerName, silverRawBlobName)
 
 # COMMAND ----------
 

@@ -1,7 +1,10 @@
 # Databricks notebook source
-from azure.storage.blob import BlobServiceContainer, BlobClient, BlobContainer
+import azure
 import json
 import pandas as pd
+import io
+
+from azure.storage.blob import BlobServiceClient
 
 # COMMAND ----------
 
@@ -20,8 +23,13 @@ def create_blob_client(blob_service_client, container_name, blob_name):
 # Download json file into a spark dataframe
 def download_json(blob_client):
     stream = blob_client.download_blob()
-    content = json.loads(stream.readall())
-    df = spark.read.json(sc.parallelize([content]))
+    jsonDataDict = json.loads(stream.readall())
+    jsonData = json.dumps(jsonDataDict)
+    jsonDataList = []
+    jsonDataList.append(jsonData)
+    jsonRDD = sc.parallelize(jsonDataList)
+    df = spark.read.json(jsonRDD)
+    display(df)
     return df
 
 # COMMAND ----------
@@ -29,6 +37,7 @@ def download_json(blob_client):
 # Upload spark dataframe as parquet file to blob storage
 def upload_parquet(blob_client, df):
     pandasDF = df.toPandas()
+    print(pandasDF)
     buffer = io.BytesIO()
     pandasDF.to_parquet(buffer)
     blob_client.upload_blob(buffer.getvalue(), overwrite=True)
