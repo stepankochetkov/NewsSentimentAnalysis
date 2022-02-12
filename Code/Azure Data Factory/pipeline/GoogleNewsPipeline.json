@@ -49,21 +49,7 @@
 						"referenceName": "BronzeToSilverRaw",
 						"type": "PipelineReference"
 					},
-					"waitOnCompletion": true,
-					"parameters": {
-						"from": {
-							"value": "@pipeline().parameters.date",
-							"type": "Expression"
-						},
-						"to": {
-							"value": "@pipeline().parameters.date",
-							"type": "Expression"
-						},
-						"qInTitle": {
-							"value": "@pipeline().parameters.topic",
-							"type": "Expression"
-						}
-					}
+					"waitOnCompletion": true
 				}
 			},
 			{
@@ -108,7 +94,7 @@
 			},
 			"date": {
 				"type": "string",
-				"defaultValue": "2022-01-17"
+				"defaultValue": "2022-01-18"
 			},
 			"topic": {
 				"type": "string",

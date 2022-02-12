@@ -16,7 +16,21 @@
 				},
 				"userProperties": [],
 				"typeProperties": {
-					"notebookPath": "/Repos/stepankochetkov@gmail.com/news-russia/Code/Databricks/bronze_to_silver_raw/GoogleNewsJson"
+					"notebookPath": "/Repos/stepankochetkov@gmail.com/news-russia/Code/Databricks/bronze_to_silver_raw/GoogleNewsJson",
+					"baseParameters": {
+						"source": {
+							"value": "@pipeline().parameters.source",
+							"type": "Expression"
+						},
+						"topic": {
+							"value": "@pipeline().parameters.topic",
+							"type": "Expression"
+						},
+						"date": {
+							"value": "@pipeline().parameters.date",
+							"type": "Expression"
+						}
+					}
 				},
 				"linkedServiceName": {
 					"referenceName": "LS_DB_DEV",
@@ -25,15 +39,15 @@
 			}
 		],
 		"parameters": {
-			"from": {
+			"source": {
+				"type": "string",
+				"defaultValue": "Google News"
+			},
+			"date": {
 				"type": "string",
 				"defaultValue": "2022-01-17"
 			},
-			"to": {
-				"type": "string",
-				"defaultValue": "2022-01-17"
-			},
-			"qInTitle": {
+			"topic": {
 				"type": "string",
 				"defaultValue": "Russia OR Russian"
 			}
