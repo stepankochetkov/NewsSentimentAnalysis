@@ -48,11 +48,11 @@
 						"type": "DatasetReference",
 						"parameters": {
 							"from": {
-								"value": "@pipeline().parameters.from",
+								"value": "@pipeline().parameters.date",
 								"type": "Expression"
 							},
 							"to": {
-								"value": "@pipeline().parameters.to",
+								"value": "@pipeline().parameters.date",
 								"type": "Expression"
 							},
 							"apiKey": {
@@ -60,7 +60,7 @@
 								"type": "Expression"
 							},
 							"qInTitle": {
-								"value": "@pipeline().parameters.qInTitle",
+								"value": "@pipeline().parameters.topic",
 								"type": "Expression"
 							},
 							"language": {
@@ -123,15 +123,11 @@
 			}
 		],
 		"parameters": {
-			"from": {
+			"date": {
 				"type": "string",
 				"defaultValue": "2022-01-17"
 			},
-			"to": {
-				"type": "string",
-				"defaultValue": "2022-01-17"
-			},
-			"qInTitle": {
+			"topic": {
 				"type": "string",
 				"defaultValue": "Russia OR Russian"
 			},
