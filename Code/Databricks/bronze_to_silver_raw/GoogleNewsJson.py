@@ -58,15 +58,19 @@ schemaGoogleNews = StructType(fields=[
 # COMMAND ----------
 
 # Bronze Configurations
+bronzePath = f'wasbs://{bronzeContainerName}@{bronzeStorageAccountName}.blob.core.windows.net/bronze/'
 bronzeBlobServiceClient = create_blob_service_client(bronzeConnectionString)
 bronzeBlobName = f'bronze/{source}/{topic}/{date}/Results_{topic}_{date}.json'
+print(bronzeBlobName)
 bronzeBlobClient = create_blob_client(bronzeBlobServiceClient, bronzeContainerName, bronzeBlobName)
 
 # COMMAND ----------
 
 # Silver Raw Confugurations
+silverRawPath = f'wasbs://{silverRawContainerName}@{silverRawStorageAccountName}.blob.core.windows.net/silver raw/'
 silverRawBlobServiceClient = create_blob_service_client(silverRawConnectionString)
 silverRawBlobName = f'silver raw/{source}/{topic}/{date}/Results_{topic}_{date}.parquet'
+print(silverRawBlobName)
 silverRawBlobClient = create_blob_client(silverRawBlobServiceClient, silverRawContainerName, silverRawBlobName)
 
 # COMMAND ----------

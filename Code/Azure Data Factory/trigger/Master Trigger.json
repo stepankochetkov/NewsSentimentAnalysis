@@ -7,7 +7,7 @@
 		"pipelines": [
 			{
 				"pipelineReference": {
-					"referenceName": "GoogleNewsPipeline",
+					"referenceName": "Master",
 					"type": "PipelineReference"
 				}
 			}
