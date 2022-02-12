@@ -1,5 +1,5 @@
 {
-	"name": "Master",
+	"name": "GoogleNewsPipeline",
 	"properties": {
 		"description": "Master pipeline that orchestrates data integration",
 		"activities": [
@@ -11,10 +11,24 @@
 				"userProperties": [],
 				"typeProperties": {
 					"pipeline": {
-						"referenceName": "BronzeToSilverRaw",
+						"referenceName": "SourceToBronze",
 						"type": "PipelineReference"
 					},
-					"waitOnCompletion": true
+					"waitOnCompletion": true,
+					"parameters": {
+						"from": {
+							"value": "@pipeline().parameters.date",
+							"type": "Expression"
+						},
+						"to": {
+							"value": "@pipeline().parameters.date",
+							"type": "Expression"
+						},
+						"qInTitle": {
+							"value": "@pipeline().parameters.topic",
+							"type": "Expression"
+						}
+					}
 				}
 			},
 			{
@@ -32,10 +46,24 @@
 				"userProperties": [],
 				"typeProperties": {
 					"pipeline": {
-						"referenceName": "SourceToBronze",
+						"referenceName": "BronzeToSilverRaw",
 						"type": "PipelineReference"
 					},
-					"waitOnCompletion": true
+					"waitOnCompletion": true,
+					"parameters": {
+						"from": {
+							"value": "@pipeline().parameters.date",
+							"type": "Expression"
+						},
+						"to": {
+							"value": "@pipeline().parameters.date",
+							"type": "Expression"
+						},
+						"qInTitle": {
+							"value": "@pipeline().parameters.topic",
+							"type": "Expression"
+						}
+					}
 				}
 			},
 			{
@@ -55,10 +83,38 @@
 						"referenceName": "SilverRawToSilverTransform",
 						"type": "PipelineReference"
 					},
-					"waitOnCompletion": true
+					"waitOnCompletion": true,
+					"parameters": {
+						"source": {
+							"value": "@pipeline().parameters.source",
+							"type": "Expression"
+						},
+						"topic": {
+							"value": "@pipeline().parameters.topic",
+							"type": "Expression"
+						},
+						"date": {
+							"value": "@pipeline().parameters.date",
+							"type": "Expression"
+						}
+					}
 				}
 			}
 		],
+		"parameters": {
+			"source": {
+				"type": "string",
+				"defaultValue": "Google News"
+			},
+			"date": {
+				"type": "string",
+				"defaultValue": "2022-01-17"
+			},
+			"topic": {
+				"type": "string",
+				"defaultValue": "Russia OR Russian"
+			}
+		},
 		"annotations": []
 	}
 }
