@@ -29,7 +29,6 @@ def download_json(blob_client):
     jsonDataList.append(jsonData)
     jsonRDD = sc.parallelize(jsonDataList)
     df = spark.read.json(jsonRDD)
-    display(df)
     return df
 
 # COMMAND ----------
@@ -37,7 +36,6 @@ def download_json(blob_client):
 # Upload spark dataframe as parquet file to blob storage
 def upload_parquet(blob_client, df):
     pandasDF = df.toPandas()
-    print(pandasDF)
     buffer = io.BytesIO()
     pandasDF.to_parquet(buffer)
     blob_client.upload_blob(buffer.getvalue(), overwrite=True)
