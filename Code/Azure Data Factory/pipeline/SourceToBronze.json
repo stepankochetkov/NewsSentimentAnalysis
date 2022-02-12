@@ -84,15 +84,15 @@
 						"type": "DatasetReference",
 						"parameters": {
 							"qInTitle": {
-								"value": "@pipeline().parameters.qInTitle",
+								"value": "@pipeline().parameters.topic",
 								"type": "Expression"
 							},
 							"from": {
-								"value": "@pipeline().parameters.from",
+								"value": "@pipeline().parameters.date",
 								"type": "Expression"
 							},
 							"to": {
-								"value": "@pipeline().parameters.to",
+								"value": "@pipeline().parameters.date",
 								"type": "Expression"
 							}
 						}
