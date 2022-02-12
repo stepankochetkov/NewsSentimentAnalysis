@@ -1,6 +1,33 @@
 {
 	"name": "SilverRawToSilverTransform",
 	"properties": {
+		"activities": [
+			{
+				"name": "DB_Sentimental_Analysis",
+				"type": "DatabricksNotebook",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"notebookPath": "/Repos/stepankochetkov@gmail.com/news-russia/Code/Databricks/silver_raw_to_silver_transform/DB_News_SentimentalAnalysis",
+					"baseParameters": {
+						"source": "Google News",
+						"topic": "Russia OR Russian",
+						"date": "2022-01-17"
+					}
+				},
+				"linkedServiceName": {
+					"referenceName": "LS_DB_DEV",
+					"type": "LinkedServiceReference"
+				}
+			}
+		],
 		"annotations": []
 	}
 }
