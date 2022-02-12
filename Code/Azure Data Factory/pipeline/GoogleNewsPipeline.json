@@ -49,7 +49,21 @@
 						"referenceName": "BronzeToSilverRaw",
 						"type": "PipelineReference"
 					},
-					"waitOnCompletion": true
+					"waitOnCompletion": true,
+					"parameters": {
+						"source": {
+							"value": "@pipeline().parameters.source",
+							"type": "Expression"
+						},
+						"date": {
+							"value": "@pipeline().parameters.date",
+							"type": "Expression"
+						},
+						"topic": {
+							"value": "@pipeline().parameters.topic",
+							"type": "Expression"
+						}
+					}
 				}
 			},
 			{
