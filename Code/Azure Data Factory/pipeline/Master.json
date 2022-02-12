@@ -37,6 +37,26 @@
 					},
 					"waitOnCompletion": true
 				}
+			},
+			{
+				"name": "PL_SR_to_ST_Sentimental_Analysis",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "PL_BR_to_SR_GoogleNews",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "SilverRawToSilverTransform",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
 			}
 		],
 		"annotations": []

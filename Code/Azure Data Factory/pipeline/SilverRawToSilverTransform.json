@@ -17,9 +17,18 @@
 				"typeProperties": {
 					"notebookPath": "/Repos/stepankochetkov@gmail.com/news-russia/Code/Databricks/silver_raw_to_silver_transform/DB_News_SentimentalAnalysis",
 					"baseParameters": {
-						"source": "Google News",
-						"topic": "Russia OR Russian",
-						"date": "2022-01-17"
+						"source": {
+							"value": "@pipeline().parameters.source",
+							"type": "Expression"
+						},
+						"topic": {
+							"value": "@pipeline().parameters.topic",
+							"type": "Expression"
+						},
+						"date": {
+							"value": "@pipeline().parameters.date",
+							"type": "Expression"
+						}
 					}
 				},
 				"linkedServiceName": {
@@ -28,6 +37,20 @@
 				}
 			}
 		],
+		"parameters": {
+			"source": {
+				"type": "string",
+				"defaultValue": "Google News"
+			},
+			"topic": {
+				"type": "string",
+				"defaultValue": "Russia OR Russian"
+			},
+			"date": {
+				"type": "string",
+				"defaultValue": "2022-01-17"
+			}
+		},
 		"annotations": []
 	}
 }
