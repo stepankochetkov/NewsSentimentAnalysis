@@ -33,9 +33,26 @@ def download_json(blob_client):
 
 # COMMAND ----------
 
+# Download paqruet file as a pandas dataframe
+def download_parquet(blob_client):
+    blob_downloader = blob_client.download_blob()
+    stream = io.BytesIO()
+    blob_downloader.readinto(stream)
+    return pd.read_paqruet(stream)
+
+# COMMAND ----------
+
 # Upload spark dataframe as parquet file to blob storage
 def upload_parquet(blob_client, df):
     pandasDF = df.toPandas()
     buffer = io.BytesIO()
     pandasDF.to_parquet(buffer)
     blob_client.upload_blob(buffer.getvalue(), overwrite=True)
+
+# COMMAND ----------
+
+# Upload pandas dataframe as csv to blob storage
+def upload_csv(blob_client, df):
+    buffer = io.StringIO()
+    df.to_csv(buffer, index=False)
+    blob_client.upload_blob(buffer.get_value(), overwrite=True)
