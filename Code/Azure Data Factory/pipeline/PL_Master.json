@@ -12,7 +12,17 @@
 						"referenceName": "PL_Source_GoggleNews_Bronze_devdata",
 						"type": "PipelineReference"
 					},
-					"waitOnCompletion": true
+					"waitOnCompletion": true,
+					"parameters": {
+						"topic": {
+							"value": "@pipeline().parameters.topic",
+							"type": "Expression"
+						},
+						"date": {
+							"value": "@pipeline().parameters.date",
+							"type": "Expression"
+						}
+					}
 				}
 			},
 			{
@@ -32,7 +42,17 @@
 						"referenceName": "PL_Bronze_to_SR_GoogleNews",
 						"type": "PipelineReference"
 					},
-					"waitOnCompletion": true
+					"waitOnCompletion": true,
+					"parameters": {
+						"topic": {
+							"value": "@pipeline().parameters.topic",
+							"type": "Expression"
+						},
+						"date": {
+							"value": "@pipeline().parameters.date",
+							"type": "Expression"
+						}
+					}
 				}
 			},
 			{
@@ -52,7 +72,17 @@
 						"referenceName": "PL_SR_to_ST_GoogleNews",
 						"type": "PipelineReference"
 					},
-					"waitOnCompletion": true
+					"waitOnCompletion": true,
+					"parameters": {
+						"topic": {
+							"value": "@pipeline().parameters.topic",
+							"type": "Expression"
+						},
+						"date": {
+							"value": "@pipeline().parameters.date",
+							"type": "Expression"
+						}
+					}
 				}
 			}
 		],
