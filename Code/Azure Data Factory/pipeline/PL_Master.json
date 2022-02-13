@@ -1,0 +1,101 @@
+{
+	"name": "PL_Master",
+	"properties": {
+		"activities": [
+			{
+				"name": "PL_Source_to_SR",
+				"type": "ExecutePipeline",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "PL_Source_GoggleNews_Bronze_devdata",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true,
+					"parameters": {
+						"topic": {
+							"value": "@pipeline().parameters.topic",
+							"type": "Expression"
+						},
+						"date": {
+							"value": "@pipeline().parameters.date",
+							"type": "Expression"
+						}
+					}
+				}
+			},
+			{
+				"name": "PL_BR_to_SR",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "PL_Source_to_SR",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "PL_Bronze_to_SR_GoogleNews",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true,
+					"parameters": {
+						"topic": {
+							"value": "@pipeline().parameters.topic",
+							"type": "Expression"
+						},
+						"date": {
+							"value": "@pipeline().parameters.date",
+							"type": "Expression"
+						}
+					}
+				}
+			},
+			{
+				"name": "PL_SR_to_ST",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "PL_BR_to_SR",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "PL_SR_to_ST_GoogleNews",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true,
+					"parameters": {
+						"topic": {
+							"value": "@pipeline().parameters.topic",
+							"type": "Expression"
+						},
+						"date": {
+							"value": "@pipeline().parameters.date",
+							"type": "Expression"
+						}
+					}
+				}
+			}
+		],
+		"parameters": {
+			"date": {
+				"type": "string",
+				"defaultValue": "2022-01-19"
+			},
+			"topic": {
+				"type": "string",
+				"defaultValue": "Russia OR Russian"
+			}
+		},
+		"annotations": []
+	}
+}
