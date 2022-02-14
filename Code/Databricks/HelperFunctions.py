@@ -38,7 +38,7 @@ def download_parquet(blob_client):
     blob_downloader = blob_client.download_blob()
     stream = io.BytesIO()
     blob_downloader.readinto(stream)
-    return pd.read_paqruet(stream)
+    return pd.read_parquet(stream)
 
 # COMMAND ----------
 
@@ -55,4 +55,4 @@ def upload_parquet(blob_client, df):
 def upload_csv(blob_client, df):
     buffer = io.StringIO()
     df.to_csv(buffer, index=False)
-    blob_client.upload_blob(buffer.get_value(), overwrite=True)
+    blob_client.upload_blob(buffer.getvalue(), overwrite=True)

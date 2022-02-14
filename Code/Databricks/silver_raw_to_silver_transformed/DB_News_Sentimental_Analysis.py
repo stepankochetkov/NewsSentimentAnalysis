@@ -84,5 +84,9 @@ df = sentimental_analysis(df, 'title')
 
 # COMMAND ----------
 
+print(df)
+
+# COMMAND ----------
+
 # Upload an updated dataframe as a csv file to the blob storage
 upload_csv(silverTransformBlobClient, df)
