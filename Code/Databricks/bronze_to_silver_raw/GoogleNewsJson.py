@@ -83,5 +83,17 @@ df_output = spark.createDataFrame(df_flat.rdd, schema=schemaGoogleNews)
 
 # COMMAND ----------
 
+print((df_output.count(), len(df_output.columns)))
+
+# COMMAND ----------
+
+df_output = df_output.na.drop(subset=['title'])
+
+# COMMAND ----------
+
+print((df_output.count(), len(df_output.columns)))
+
+# COMMAND ----------
+
 # Upload data to blob storage
 upload_parquet(silverRawBlobClient, df_output)
